@@ -33,4 +33,13 @@ app.post("/herois", function (req, res) {
 
 });
 
+// Read by ID -> GET /herois/:id
+// usamos ":" no express
+
+// Endpoint ler pelo ID
+app.get("/herois/:id", function(req, res) {
+    res.send("Ler pelo ID");
+});
+
+
 app.listen(3000);
