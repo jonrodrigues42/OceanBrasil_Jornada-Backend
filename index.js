@@ -59,4 +59,13 @@ app.put("/herois/:id", function (req, res) {
 });
 
 
+// Delete -> [DELETE] /herois/:id
+app.delete("/herois/:id", function (req, res) {
+    const id = req.params.id - 1;
+
+    delete lista[id];
+    
+    res.send("Item excluido com sucesso")
+})
+
 app.listen(3000);
