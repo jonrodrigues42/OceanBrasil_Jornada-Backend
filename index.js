@@ -44,7 +44,7 @@ app.get("/herois/:id", function(req, res) {
     // Pegar a informação da lista
     const item = lista[id];
 
-    res.send(item)
+    res.send("ID recebido: " + id + "\nCorresponde ao item: " + item)
 });
 
 
