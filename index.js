@@ -36,9 +36,15 @@ app.post("/herois", function (req, res) {
 // Read by ID -> GET /herois/:id
 // usamos ":" no express
 
-// Endpoint ler pelo ID
 app.get("/herois/:id", function(req, res) {
-    res.send("Ler pelo ID");
+    // parametro de rota
+    // Pegar o parâmetro e salvar na const id
+    const id = req.params.id - 1;
+
+    // Pegar a informação da lista
+    const item = lista[id];
+
+    res.send(item)
 });
 
 
