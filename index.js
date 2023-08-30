@@ -81,10 +81,10 @@ async function main() {
 
 
     // Delete -> [DELETE] /herois/:id
-    app.delete("/herois/:id", function (req, res) {
-        const id = req.params.id - 1;
+    app.delete("/herois/:id", async function (req, res) {
+        const id = req.params.id;
 
-        delete lista[id];
+        await collection.deleteOne({ _id: new ObjectId(id) });
 
         res.send("Item excluido com sucesso")
     })
