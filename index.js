@@ -1,14 +1,18 @@
 const express = require("express");
-const { MongoClient } = require("mongodb");
+const { MongoClient, Collection } = require("mongodb");
 
-const url = "mongodb://localhost:27017";
-const db = "jornada-backend";
+const url = "mongodb://127.0.0.1:27017";
+// const url = "mongodb://localhost:27017";
+const dbName = "jornada-backend";
 const client = new MongoClient(url);
 
 async function main() {
     console.info("Conectando ao banco de dados...")
     await client.connect();
     console.info("Banco de dados conectado com sucesso!")
+
+    const db = client.db(dbName);
+    const collection = db.collection("herois");
 
     const app = express();
 
@@ -30,8 +34,11 @@ async function main() {
     //             0                    1                2
 
     // Read All -> [GET] /herois
-    app.get("/herois", function (req, res) {
-        res.send(lista.filter(Boolean));
+    app.get("/herois", async function (req, res) {
+        const itens = await collection.find().toArray();
+        res.send(itens);
+
+        // res.send(lista.filter(Boolean));
     });
 
     // Create -> [POST] /herois
