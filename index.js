@@ -1,5 +1,5 @@
 const express = require("express");
-const { MongoClient, Collection } = require("mongodb");
+const { MongoClient, Collection, ObjectId } = require("mongodb");
 
 const url = "mongodb://127.0.0.1:27017";
 // const url = "mongodb://localhost:27017";
@@ -53,15 +53,17 @@ async function main() {
     // Read by ID -> GET /herois/:id
     // usamos ":" no express
 
-    app.get("/herois/:id", function(req, res) {
+    app.get("/herois/:id", async function(req, res) {
         // parametro de rota
         // Pegar o parâmetro e salvar na const id
-        const id = req.params.id - 1;
+        const id = req.params.id;
 
         // Pegar a informação da lista
-        const item = lista[id];
+        const item = await collection.findOne({
+            _id: new ObjectId(id),
+        });
 
-        res.send("ID recebido: " + id + "\nCorresponde ao item: " + item)
+        res.send(item)
     });
 
 
