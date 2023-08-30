@@ -6,6 +6,9 @@ const db = "jornada-backend";
 const client = new MongoClient(url);
 
 async function main() {
+    console.info("Conectando ao banco de dados...")
+    await client.connect();
+    console.info("Banco de dados conectado com sucesso!")
 
     const app = express();
 
