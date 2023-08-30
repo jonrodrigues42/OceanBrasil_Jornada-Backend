@@ -37,17 +37,16 @@ async function main() {
     app.get("/herois", async function (req, res) {
         const itens = await collection.find().toArray();
         res.send(itens);
-
-        // res.send(lista.filter(Boolean));
     });
 
     // Create -> [POST] /herois
-    app.post("/herois", function (req, res) {
-        // console.log(req.body, typeof req.body);
-        
-        const item = req.body.nome;
-        lista.push(item)
-        res.send("Item criado com sucesso!")
+    app.post("/herois", async function (req, res) {        
+        const item = req.body;
+
+        // Inserir o item na collection
+        await collection.insertOne(item)
+
+        res.send(item)
 
     });
 
