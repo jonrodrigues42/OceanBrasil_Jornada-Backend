@@ -57,9 +57,7 @@ async function main() {
         const id = req.params.id;
 
         // Pegar a informação da collection
-        const item = await collection.findOne({
-            _id: new ObjectId(id),
-        });
+        const item = await collection.findOne({ _id: new ObjectId(id) });
 
         res.send(item)
     });
@@ -83,10 +81,8 @@ async function main() {
     // Delete -> [DELETE] /herois/:id
     app.delete("/herois/:id", async function (req, res) {
         const id = req.params.id;
-
         await collection.deleteOne({ _id: new ObjectId(id) });
-
-        res.send("Item excluido com sucesso")
+        res.status(204).send()
     })
 
     app.listen(3000);
