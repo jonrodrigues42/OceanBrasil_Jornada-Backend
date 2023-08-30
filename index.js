@@ -45,9 +45,7 @@ async function main() {
 
         // Inserir o item na collection
         await collection.insertOne(item)
-
         res.send(item)
-
     });
 
     // Read by ID -> GET /herois/:id
@@ -58,7 +56,7 @@ async function main() {
         // Pegar o parâmetro e salvar na const id
         const id = req.params.id;
 
-        // Pegar a informação da lista
+        // Pegar a informação da collection
         const item = await collection.findOne({
             _id: new ObjectId(id),
         });
@@ -68,13 +66,17 @@ async function main() {
 
 
     // Update -> [PUT] /herois/:id
-    app.put("/herois/:id", function (req, res) {
-        const id = req.params.id - 1;
-        const item = req.body.nome;
+    app.put("/herois/:id", async function (req, res) {
+        const id = req.params.id;
+        const item = req.body;
 
-        lista[id] = item
+        // Atualizar item na collection
+        await collection.updateOne(
+            { _id: new ObjectId(id) },
+            { $set: item}
+        );
 
-        res.send("Item editado com sucesso")
+        res.send(item)
     });
 
 
