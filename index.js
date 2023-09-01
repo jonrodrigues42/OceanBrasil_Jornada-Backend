@@ -1,8 +1,9 @@
 const express = require("express");
 const { MongoClient, Collection, ObjectId } = require("mongodb");
 
-const url = "mongodb://127.0.0.1:27017";
+// const url = "mongodb://127.0.0.1:27017";
 // const url = "mongodb://localhost:27017";
+const url = "mongodb+srv://admin:j0R9PnLieOjsI8jU@cluster0.qs1ficz.mongodb.net"
 const dbName = "jornada-backend";
 const client = new MongoClient(url);
 
